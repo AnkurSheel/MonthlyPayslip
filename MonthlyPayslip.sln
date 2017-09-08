@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyPayslip.ConsoleApp", "MonthlyPayslip\MonthlyPayslip.ConsoleApp.csproj", "{84C970A7-63BF-4D0D-91B7-CB03166B5288}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyPayslip.BusinessLayer", "MonthlyPayslip.BusinessLayer\MonthlyPayslip.BusinessLayer.csproj", "{FCDC5669-D279-49B6-98E8-313F5AD3CFE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyPayslip.DataLayer", "MonthlyPayslip.DataLayer\MonthlyPayslip.DataLayer.csproj", "{D5376C98-CB1E-4ADA-A756-CF6DCF335A99}"
@@ -13,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyPayslip.Models", "Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyPayslip.UnitTests", "MonthlyPayslip.UnitTests\MonthlyPayslip.UnitTests.csproj", "{4FAE96CB-9C0A-436A-99D9-C27EA59EE605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonthlyPayslip.ConsoleApp", "MonthlyPayslip.ConsoleApp\MonthlyPayslip.ConsoleApp.csproj", "{84C970A7-63BF-4D0D-91B7-CB03166B5288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FCDC5669-D279-49B6-98E8-313F5AD3CFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FCDC5669-D279-49B6-98E8-313F5AD3CFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCDC5669-D279-49B6-98E8-313F5AD3CFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{4FAE96CB-9C0A-436A-99D9-C27EA59EE605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FAE96CB-9C0A-436A-99D9-C27EA59EE605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FAE96CB-9C0A-436A-99D9-C27EA59EE605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C970A7-63BF-4D0D-91B7-CB03166B5288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
