@@ -19,7 +19,7 @@ namespace MonthlyPayslip.DataLayer.Repositories
         {
             if (string.IsNullOrEmpty(_inputFileName))
             {
-                throw new ArgumentException("No Filename specified");
+                throw new ArgumentException($"No Filename specified for type {typeof(T)}");
             }
 
             var fileStream = new FileStream(_inputFileName, FileMode.Append);
@@ -34,13 +34,13 @@ namespace MonthlyPayslip.DataLayer.Repositories
             var entities = new List<T>();
             if (string.IsNullOrEmpty(_inputFileName))
             {
-                return entities;
+                throw new ArgumentException($"No Filename specified for type {typeof(T)}");
             }
 
             var fileStream = new FileStream(_inputFileName, FileMode.Open);
             using (var streamReader = new StreamReader(fileStream))
             {
-                string line = streamReader.ReadLine();
+                var line = streamReader.ReadLine();
                 while (line != null)
                 {
                     var data = line.Split(',');

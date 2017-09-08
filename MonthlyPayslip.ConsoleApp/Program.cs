@@ -9,9 +9,15 @@ namespace MonthlyPayslip.ConsoleApp
     {
         private static void Main(string[] args)
         {
-            var employeeCsv = "employee.csv";
-            var taxtableCsv = "taxTable.csv";
-            var payslipsCsv = "payslips.csv";
+            if (args.Length < 3)
+            {
+                Console.WriteLine("Usage: MonthlyPayslip.ConsoleApp.exe employeeCsvFile taxtableCsvFile payslipsCsvFile");
+                return;
+            }
+
+            var employeeCsv = args[0];
+            var taxtableCsv = args[1];
+            var payslipsCsv = args[2];
 
             var employeeRepository = new EmployeeRepository(employeeCsv);
             var taxTableRepository = new TaxTableRepository(taxtableCsv);
@@ -28,8 +34,6 @@ namespace MonthlyPayslip.ConsoleApp
                 Console.WriteLine(payslip.ToCsv());
                 payslipRepository.Add(payslip);
             }
-
-            Console.ReadLine();
         }
     }
 }
