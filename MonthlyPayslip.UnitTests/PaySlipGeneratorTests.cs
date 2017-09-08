@@ -26,7 +26,13 @@ namespace MonthlyPayslip.UnitTests
 
             _employees = new List<Employee>()
                          {
-                             new Employee() { FirstName = _firstName, LastName = _lastName, AnnualSalary = 60000 } 
+                             new Employee()
+                             {
+                                 FirstName = _firstName,
+                                 LastName = _lastName,
+                                 AnnualSalary = 60000,
+                                 SuperRate = 0.09,
+                             }
                          };
 
             _employeeRepository = Substitute.For<IRepository<Employee>>();
@@ -61,5 +67,24 @@ namespace MonthlyPayslip.UnitTests
             Assert.AreEqual(5005, payslips.First().GrossIncome);
         }
 
+        [TestMethod]
+        public void GivenAnnualSalaryAndSuperRateThenPayslipSuperIsRoundedDownCorrectly()
+        {
+            _employees.First().SuperRate = (410.49 * 12) / _employees.First().AnnualSalary;
+
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(410, payslips.First().Super);
+        }
+
+        [TestMethod]
+        public void GivenAnnualSalaryAndSuperRateThenPayslipSuperIsRoundedUpCorrectly()
+        {
+            _employees.First().SuperRate = (410.50 * 12) / _employees.First().AnnualSalary;
+
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(411, payslips.First().Super);
+        }
     }
 }

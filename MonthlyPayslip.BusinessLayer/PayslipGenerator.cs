@@ -24,7 +24,8 @@ namespace MonthlyPayslip.BusinessLayer
             foreach (var employee in employees)
             {
                 var grossIncome = GetGrossIncome(employee.AnnualSalary);
-                var payslip = new Payslip() { Name = $"{employee.FirstName} {employee.LastName}", GrossIncome = grossIncome };
+                var super = GetSuper(grossIncome, employee.SuperRate);
+                var payslip = new Payslip() { Name = $"{employee.FirstName} {employee.LastName}", GrossIncome = grossIncome, Super = super };
                 payslips.Add(payslip);
             }
 
@@ -36,6 +37,13 @@ namespace MonthlyPayslip.BusinessLayer
             var grossIncome = Math.Round((double)annualSalary / NumberOfMonths, 2);
             var roundedGrossIncome = (int)Math.Round(grossIncome, MidpointRounding.AwayFromZero);
             return roundedGrossIncome;
+        }
+
+        private int GetSuper(int grossIncome, double superRate)
+        {
+            var super = Math.Round(grossIncome * superRate, 2);
+            var roundedSuper = (int)Math.Round(super, MidpointRounding.AwayFromZero);
+            return roundedSuper;
         }
     }
 }

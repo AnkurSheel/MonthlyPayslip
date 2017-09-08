@@ -7,5 +7,7 @@
         public string LastName { get; set; }
 
         public int AnnualSalary { get; set; }
+
+        public double SuperRate { get; set; }
     }
 }
