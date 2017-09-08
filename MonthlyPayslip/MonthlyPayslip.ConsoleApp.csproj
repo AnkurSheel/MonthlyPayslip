@@ -61,5 +61,19 @@
     <Analyzer Include="..\packages\System.Security.Cryptography.Hashing.Algorithms.Analyzers.1.1.0\analyzers\dotnet\cs\System.Security.Cryptography.Hashing.Algorithms.Analyzers.dll" />
     <Analyzer Include="..\packages\System.Security.Cryptography.Hashing.Algorithms.Analyzers.1.1.0\analyzers\dotnet\cs\System.Security.Cryptography.Hashing.Algorithms.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonthlyPayslip.BusinessLayer\MonthlyPayslip.BusinessLayer.csproj">
+      <Project>{FCDC5669-D279-49B6-98E8-313F5AD3CFE8}</Project>
+      <Name>MonthlyPayslip.BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonthlyPayslip.DataLayer\MonthlyPayslip.DataLayer.csproj">
+      <Project>{D5376C98-CB1E-4ADA-A756-CF6DCF335A99}</Project>
+      <Name>MonthlyPayslip.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonthlyPayslip.Models\MonthlyPayslip.Models.csproj">
+      <Project>{732588E1-6F1C-47E8-BA9B-527FC8584407}</Project>
+      <Name>MonthlyPayslip.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

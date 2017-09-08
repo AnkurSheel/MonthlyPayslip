@@ -13,5 +13,10 @@
         public int NetIncome { get; set; }
 
         public int Super { get; set; }
+
+        public string ToCsv()
+        {
+          return $"{Name}, {PayPeriod}, {GrossIncome}, {IncomeTax}, {NetIncome}, {Super}";
+        }
     }
 }
