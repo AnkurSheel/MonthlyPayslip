@@ -53,7 +53,7 @@ namespace MonthlyPayslip.BusinessLayer
 
         private int GetGrossIncome(int annualSalary)
         {
-            var grossIncome = Math.Round((double)annualSalary / NumberOfMonths, 2);
+            var grossIncome = (double)annualSalary / NumberOfMonths;
             var roundedGrossIncome = (int)Math.Round(grossIncome, MidpointRounding.AwayFromZero);
             return roundedGrossIncome;
         }
@@ -104,7 +104,7 @@ namespace MonthlyPayslip.BusinessLayer
 
         private int GetSuper(int grossIncome, double superRate)
         {
-            var super = Math.Round(grossIncome * superRate, 2);
+            var super = grossIncome * superRate;
             var roundedSuper = (int)Math.Round(super, MidpointRounding.AwayFromZero);
             return roundedSuper;
         }
