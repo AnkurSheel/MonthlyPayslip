@@ -25,7 +25,13 @@ namespace MonthlyPayslip.BusinessLayer
             {
                 var grossIncome = GetGrossIncome(employee.AnnualSalary);
                 var super = GetSuper(grossIncome, employee.SuperRate);
-                var payslip = new Payslip() { Name = $"{employee.FirstName} {employee.LastName}", GrossIncome = grossIncome, Super = super };
+                var payslip = new Payslip()
+                              {
+                                  Name = $"{employee.FirstName} {employee.LastName}",
+                                  PayPeriod = employee.PaymentStartDate,
+                                  GrossIncome = grossIncome,
+                                  Super = super
+                              };
                 payslips.Add(payslip);
             }
 

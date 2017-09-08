@@ -12,6 +12,8 @@ namespace MonthlyPayslip.UnitTests
     [TestClass]
     public class PaySlipGeneratorTests
     {
+        private const string PaymentDate = "01 March – 31 March";
+
         private IRepository<Employee> _employeeRepository;
         private PayslipGenerator _payslipGenerator;
         private string _firstName;
@@ -32,6 +34,7 @@ namespace MonthlyPayslip.UnitTests
                                  LastName = _lastName,
                                  AnnualSalary = 60000,
                                  SuperRate = 0.09,
+                                 PaymentStartDate = PaymentDate
                              }
                          };
 
@@ -85,6 +88,14 @@ namespace MonthlyPayslip.UnitTests
             var payslips = _payslipGenerator.GetPayslips();
 
             Assert.AreEqual(411, payslips.First().Super);
+        }
+
+        [TestMethod]
+        public void GivenPaymentStartDateThenPayPeriodIsCorrect()
+        {
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(PaymentDate, payslips.First().PayPeriod);
         }
     }
 }
