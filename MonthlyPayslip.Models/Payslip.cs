@@ -8,6 +8,8 @@
 
         public int GrossIncome { get; set; }
 
+        public int IncomeTax { get; set; }
+
         public int Super { get; set; }
     }
 }
