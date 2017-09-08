@@ -12,30 +12,31 @@ namespace MonthlyPayslip.UnitTests
     [TestClass]
     public class PaySlipGeneratorTests
     {
-        private const string PaymentDate = "01 March – 31 March";
-
         private IRepository<Employee> _employeeRepository;
-        private PayslipGenerator _payslipGenerator;
-        private string _firstName;
-        private string _lastName;
-        private List<Employee> _employees;
         private IRepository<TaxBracket> _taxTableRepository;
+        private PayslipGenerator _payslipGenerator;
+        private List<Employee> _employees;
 
         [TestInitialize]
         public void Setup()
         {
-            _firstName = "David";
-            _lastName = "Rudd";
-
             _employees = new List<Employee>()
                          {
                              new Employee()
                              {
-                                 FirstName = _firstName,
-                                 LastName = _lastName,
+                                 FirstName = "David",
+                                 LastName = "Rudd",
                                  AnnualSalary = 60000,
                                  SuperRate = 0.09,
-                                 PaymentStartDate = PaymentDate
+                                 PaymentStartDate = "01 March – 31 March"
+                             },
+                             new Employee()
+                             {
+                                 FirstName = "Ryan",
+                                 LastName = "Chen",
+                                 AnnualSalary = 120000,
+                                 SuperRate = 0.10,
+                                 PaymentStartDate = "01 April – 30 April"
                              }
                          };
 
@@ -60,7 +61,7 @@ namespace MonthlyPayslip.UnitTests
         public void GivenFirstNameAndLastNameThenPayslipNameIsGeneratedCorrectly()
         {
             var payslips = _payslipGenerator.GetPayslips();
-            Assert.AreEqual($"{_firstName} {_lastName}", payslips.First().Name);
+            Assert.AreEqual("David Rudd", payslips.First().Name);
         }
 
         [TestMethod]
@@ -107,7 +108,7 @@ namespace MonthlyPayslip.UnitTests
         {
             var payslips = _payslipGenerator.GetPayslips();
 
-            Assert.AreEqual(PaymentDate, payslips.First().PayPeriod);
+            Assert.AreEqual("01 March – 31 March", payslips.First().PayPeriod);
         }
 
         [TestMethod]
@@ -193,5 +194,27 @@ namespace MonthlyPayslip.UnitTests
 
             Assert.AreEqual(6254, payslips.First().NetIncome);
         }
+
+        [TestMethod]
+        public void Given2EmployeesThen2PayslipsAreReturnedCorrectly()
+        {
+            var payslips = _payslipGenerator.GetPayslips().ToArray();
+            Assert.AreEqual(2, payslips.Count());
+
+            Assert.AreEqual("David Rudd", payslips[0].Name);
+            Assert.AreEqual("01 March – 31 March", payslips[0].PayPeriod);
+            Assert.AreEqual(5000, payslips[0].GrossIncome);
+            Assert.AreEqual(921, payslips[0].IncomeTax);
+            Assert.AreEqual(4079, payslips[0].NetIncome);
+            Assert.AreEqual(450, payslips[0].Super);
+
+            Assert.AreEqual("Ryan Chen", payslips[1].Name);
+            Assert.AreEqual("01 April – 30 April", payslips[1].PayPeriod);
+            Assert.AreEqual(10000, payslips[1].GrossIncome);
+            Assert.AreEqual(2696, payslips[1].IncomeTax);
+            Assert.AreEqual(7304, payslips[1].NetIncome);
+            Assert.AreEqual(1000, payslips[1].Super);
+        }
+
     }
 }
