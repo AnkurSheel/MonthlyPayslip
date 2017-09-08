@@ -16,7 +16,7 @@
 
         public string ToCsv()
         {
-          return $"{Name}, {PayPeriod}, {GrossIncome}, {IncomeTax}, {NetIncome}, {Super}";
+          return $"{Name},{PayPeriod},{GrossIncome},{IncomeTax},{NetIncome},{Super}";
         }
     }
 }
