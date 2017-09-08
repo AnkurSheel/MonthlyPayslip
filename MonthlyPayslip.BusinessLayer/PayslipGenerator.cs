@@ -36,6 +36,7 @@ namespace MonthlyPayslip.BusinessLayer
                                   PayPeriod = employee.PaymentStartDate,
                                   GrossIncome = grossIncome,
                                   IncomeTax = incomeTax,
+                                  NetIncome = grossIncome - incomeTax,
                                   Super = super
                               };
                 payslips.Add(payslip);

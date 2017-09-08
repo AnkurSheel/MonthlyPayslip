@@ -154,5 +154,44 @@ namespace MonthlyPayslip.UnitTests
             var expectedTax = (int)(Math.Round((17547 + (.37 * (annualSalary - 80000))) / 12, MidpointRounding.AwayFromZero));
             Assert.AreEqual(expectedTax, payslips.First().IncomeTax);
         }
+        [TestMethod]
+        public void GivenAnnualSalaryIsInLowestTaxBracketThenNetIncomeIsCorrect()
+        {
+            _employees.First().AnnualSalary = 18200;
+
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(1517, payslips.First().NetIncome);
+        }
+
+        [TestMethod]
+        public void GivenAnnualSalaryIsIn2ndTaxBracketThenNetIncomeIsCorrect()
+        {
+            _employees.First().AnnualSalary = 37000;
+
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(2785, payslips.First().NetIncome);
+        }
+
+        [TestMethod]
+        public void GivenAnnualSalaryIsIn3rdTaxBracketThenNetIncomeIsCorrect()
+        {
+            _employees.First().AnnualSalary = 60050;
+
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(4082, payslips.First().NetIncome);
+        }
+
+        [TestMethod]
+        public void GivenAnnualSalaryIsInLastTaxBracketThenNetIncomeIsCorrect()
+        {
+            _employees.First().AnnualSalary = 100000;
+
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(6254, payslips.First().NetIncome);
+        }
     }
 }
