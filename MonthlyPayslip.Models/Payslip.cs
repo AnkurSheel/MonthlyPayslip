@@ -3,5 +3,7 @@
     public class Payslip
     {
         public string Name { get; set; }
+
+        public int GrossIncome { get; set; }
     }
 }

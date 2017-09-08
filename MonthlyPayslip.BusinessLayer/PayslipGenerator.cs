@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MonthlyPayslip.DataLayer.Interfaces;
 using MonthlyPayslip.Models;
 
@@ -6,6 +7,8 @@ namespace MonthlyPayslip.BusinessLayer
 {
     public class PayslipGenerator
     {
+        private const int NumberOfMonths = 12;
+
         private readonly IRepository<Employee> _employeeRepository;
 
         public PayslipGenerator(IRepository<Employee> employeeRepository)
@@ -20,11 +23,19 @@ namespace MonthlyPayslip.BusinessLayer
 
             foreach (var employee in employees)
             {
-                var payslip = new Payslip() { Name = $"{employee.FirstName} {employee.LastName}" };
+                var grossIncome = GetGrossIncome(employee.AnnualSalary);
+                var payslip = new Payslip() { Name = $"{employee.FirstName} {employee.LastName}", GrossIncome = grossIncome };
                 payslips.Add(payslip);
             }
 
             return payslips;
+        }
+
+        private int GetGrossIncome(int annualSalary)
+        {
+            var grossIncome = Math.Round((double)annualSalary / NumberOfMonths, 2);
+            var roundedGrossIncome = (int)Math.Round(grossIncome, MidpointRounding.AwayFromZero);
+            return roundedGrossIncome;
         }
     }
 }

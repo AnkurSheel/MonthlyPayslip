@@ -16,6 +16,7 @@ namespace MonthlyPayslip.UnitTests
         private PayslipGenerator _payslipGenerator;
         private string _firstName;
         private string _lastName;
+        private List<Employee> _employees;
 
         [TestInitialize]
         public void Setup()
@@ -23,13 +24,13 @@ namespace MonthlyPayslip.UnitTests
             _firstName = "David";
             _lastName = "Rudd";
 
-            var employees = new List<Employee>()
-                            {
-                                new Employee() { FirstName = _firstName, LastName = _lastName },
-                            };
+            _employees = new List<Employee>()
+                         {
+                             new Employee() { FirstName = _firstName, LastName = _lastName, AnnualSalary = 60000 } 
+                         };
 
             _employeeRepository = Substitute.For<IRepository<Employee>>();
-            _employeeRepository.FindAll().ReturnsForAnyArgs(employees);
+            _employeeRepository.FindAll().ReturnsForAnyArgs(_employees);
 
             _payslipGenerator = new PayslipGenerator(_employeeRepository);
         }
@@ -38,7 +39,27 @@ namespace MonthlyPayslip.UnitTests
         public void GivenFirstNameAndLastNameThenPayslipNameIsGeneratedCorrectly()
         {
             var payslips = _payslipGenerator.GetPayslips();
-            Assert.AreEqual($"{_firstName} {_lastName}", payslips.Single().Name);
+            Assert.AreEqual($"{_firstName} {_lastName}", payslips.First().Name);
         }
+
+        [TestMethod]
+        public void GivenAnnualSalaryThenPayslipGrossIncomeIsRoundedDownCorrectly()
+        {
+            _employees.First().AnnualSalary = (int)(12 * 5004.49);
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(5004, payslips.First().GrossIncome);
+        }
+
+        [TestMethod]
+        public void GivenAnnualSalaryThenPayslipGrossIncomeIsRoundedUpCorrectly()
+        {
+            _employees.First().AnnualSalary = (int)(12 * 5004.50);
+
+            var payslips = _payslipGenerator.GetPayslips();
+
+            Assert.AreEqual(5005, payslips.First().GrossIncome);
+        }
+
     }
 }
